@@ -20,5 +20,30 @@ function getComputerChoice(){
     }
 }
 
+/*
+Create a variable and declare it as the user imput
+Create an If condition
+If the user writes 'Rock', return 'Rock'
+If the user writes 'Paper', return 'Paper'
+If the user writes 'Scissors', return 'Scissors'
+If the user writes something else, return a warning
+*/
 
-console.log(getComputerChoice());
+function getHumanChoice(){
+    let answer = prompt('Rock, paper, scissors?');
+    if(answer === 'Rock' || answer === 'rock'){
+        return('Rock');
+    }
+    else if(answer === 'Paper' || answer === 'paper'){
+        return('Paper');
+    }
+    else if(answer === 'Scissors' || answer === 'scissors'){
+        return('Scissors');
+    }
+    else{
+        return('Invalid answer')
+    }
+}
+
+
+console.log(getHumanChoice());
