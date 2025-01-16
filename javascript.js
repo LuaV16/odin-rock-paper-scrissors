@@ -47,48 +47,45 @@ function getHumanChoice(){
 }
 
 function playRound(humanChoice, computerChoice){
-    if(humanChoice === 'Rock'){
-        if(computerChoice === 'Rock'){
-            console.log('Its a tie!');
-            return('Tie');
-        }
-        else if(computerChoice === 'Paper'){
-            console.log('You lose! Paper beats Rock');
-            return('Computer Wins');
-        }
-        else if(computerChoice === 'Scissors'){
-            console.log('You win! Rock beats Scissors');
-            return('Human Wins');
-        }
+    let rock = "Rock";
+    let paper = "Paper";
+    let scissors = "Scissors";
+    let win = "Win";
+    let lose = "Lose";
+    let tie = "Tie";
+    let rockDictionary = {
+        [scissors]: win,
+        [paper]: lose,
+        [rock]: tie,
     }
-    else if(humanChoice === 'Paper'){
-        if(computerChoice === 'Rock'){
-            console.log('You win! Paper beats Rock');
-            return('Human Wins');
-        }
-        else if(computerChoice === 'Paper'){
-            console.log('Its a tie!');
-            return('Tie');
-        }
-        else if(computerChoice === 'Scissors'){
-            console.log('You lose! Scissors beats Paper');
-            return('Computer Wins');
-        }
+    let paperDictionary = {
+        [scissors]: lose,
+        [paper]: tie,
+        [rock]: win,
     }
-    else if(humanChoice === 'Scissors'){
-        if(computerChoice === 'Rock'){
-            console.log('You lose! Rock beats Scissors');
-            return('Computer Wins');
-        }
-        else if(computerChoice === 'Paper'){
-            console.log('You win! Scissors beats Paper');
-            return('Human Wins');
-        }
-        else if(computerChoice === 'Scissors'){
-            console.log('Its a tie!');
-            return('Tie');
-        }
+    let scissorsDictionary = {
+        [scissors]: tie,
+        [paper]: win,
+        [rock]: lose,
     }
+    let rockPaperScissors = {
+        [rock]: rockDictionary,
+        [paper]: paperDictionary,
+        [scissors]: scissorsDictionary,
+    }
+
+    let additionalResponse = "";
+
+    if (rockPaperScissors[`${humanChoice}`][`${computerChoice}`] === win){
+        additionalResponse = humanChoice + " beats " + computerChoice + "!";
+    }
+    else if(rockPaperScissors[`${humanChoice}`][`${computerChoice}`] === lose){
+        additionalResponse = computerChoice + " beats " + humanChoice + "!";
+    }
+    
+    console.log("You " + rockPaperScissors[`${humanChoice}`][`${computerChoice}`] + "! " + additionalResponse);
+    
+    return(rockPaperScissors[humanChoice][computerChoice]);
 }
 
 function playGame(){
@@ -102,11 +99,11 @@ function playGame(){
         let humanChoice = getHumanChoice();
         let computerChoice = getComputerChoice();
         let result = playRound(humanChoice, computerChoice);
-        if (result === 'Computer Wins'){
-            computerScore =+ 1
+        if (result === 'Lose'){
+            computerScore += 1
         }
-        else if (result === 'Human Wins'){
-            humanScore =+ 1
+        else if (result === 'Win'){
+            humanScore += 1
         }
     }
 
@@ -120,10 +117,6 @@ function playGame(){
         console.log('Its a tie!');
     }
 }
-
-
-
-
 
 
 playGame();
